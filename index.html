@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pham Quang Huy | 글로벌 사업개발</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #1A2744;
+    --navy-light: #243660;
+    --gold: #E8A020;
+    --gold-light: #F5C060;
+    --white: #FFFFFF;
+    --gray-bg: #F7F8FA;
+    --gray-text: #6B7280;
+    --gray-border: #E5E7EB;
+    --text: #111827;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans KR', 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,39,68,0.97); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 64px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 400; transition: color 0.2s; letter-spacing: 0.03em; }
+  .nav-links a:hover { color: var(--gold); }
+  .lang-toggle {
+    display: flex; border: 1.5px solid var(--gold); border-radius: 4px; overflow: hidden; cursor: pointer;
+  }
+  .lang-toggle button {
+    background: none; border: none; color: rgba(255,255,255,0.6); padding: 4px 12px;
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em;
+  }
+  .lang-toggle button.active { background: var(--gold); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--navy);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 120px 10% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #DA291C 0%, #DA291C 50%, #003087 50%, #003087 100%);
+  }
+  .hero-bridge {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #DA291C, #E8A020, #003087);
+    opacity: 0.7;
+  }
+  .hero-eyebrow {
+    color: var(--gold); font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: var(--white);
+    line-height: 1.15; margin-bottom: 0.5rem; letter-spacing: -0.01em;
+  }
+  .hero h1 .name-kr { display: block; font-size: 0.55em; font-weight: 300; color: rgba(255,255,255,0.55); margin-top: 0.3rem; letter-spacing: 0.05em; }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem); color: rgba(255,255,255,0.7);
+    margin: 1.6rem 0 2.4rem; max-width: 540px; font-weight: 300; line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.8rem; }
+  .hero-tag {
+    border: 1px solid rgba(232,160,32,0.5); color: var(--gold-light);
+    padding: 5px 14px; border-radius: 2px; font-size: 0.8rem; font-weight: 500;
+    font-family: 'Inter', sans-serif; letter-spacing: 0.04em;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); padding: 13px 28px;
+    font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 3px;
+    transition: background 0.2s; letter-spacing: 0.02em; font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.4); color: var(--white); padding: 13px 28px;
+    font-weight: 500; font-size: 0.9rem; text-decoration: none; border-radius: 3px;
+    transition: border-color 0.2s; letter-spacing: 0.02em; font-family: 'Inter', sans-serif;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--navy-light); padding: 28px 10%;
+    display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;
+    border-bottom: 1px solid rgba(232,160,32,0.2);
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 700; color: var(--gold); font-family: 'Inter', sans-serif; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 2px; letter-spacing: 0.05em; }
+
+  /* SECTION */
+  section { padding: 80px 10%; }
+  section:nth-child(even) { background: var(--gray-bg); }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .section-line { width: 40px; height: 3px; background: var(--gold); margin-bottom: 2.5rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .about-text p { color: var(--gray-text); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+  .highlight-card {
+    background: var(--white); border: 1px solid var(--gray-border);
+    border-left: 4px solid var(--gold); padding: 18px 20px; border-radius: 0 4px 4px 0;
+  }
+  .highlight-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .highlight-card p { font-size: 0.82rem; color: var(--gray-text); line-height: 1.5; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--white); border: 1px solid var(--gray-border);
+    padding: 28px; border-radius: 6px; transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { box-shadow: 0 8px 24px rgba(26,39,68,0.1); transform: translateY(-2px); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .skill-card p { font-size: 0.85rem; color: var(--gray-text); line-height: 1.6; }
+
+  /* LANGUAGES */
+  .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+  .lang-item { background: var(--white); border: 1px solid var(--gray-border); padding: 20px 24px; border-radius: 6px; }
+  .lang-item .flag { font-size: 1.6rem; margin-bottom: 8px; }
+  .lang-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+  .lang-item .level { font-size: 0.8rem; color: var(--gold); font-weight: 600; margin-top: 2px; font-family: 'Inter', sans-serif; }
+  .lang-item .desc { font-size: 0.8rem; color: var(--gray-text); margin-top: 4px; }
+  .lang-bar { height: 4px; background: var(--gray-border); border-radius: 2px; margin-top: 12px; }
+  .lang-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transition: width 1s ease; }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 16px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--gray-border);
+  }
+  .timeline-item { display: flex; gap: 2rem; margin-bottom: 2.5rem; }
+  .timeline-dot {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--navy);
+    border: 3px solid var(--gold); flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; z-index: 1;
+  }
+  .timeline-content { flex: 1; }
+  .timeline-meta { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .timeline-title { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+  .timeline-company { font-size: 0.85rem; color: var(--gold); font-weight: 600; margin-bottom: 0.5rem; }
+  .timeline-date { font-size: 0.8rem; color: var(--gray-text); font-family: 'Inter', sans-serif; }
+  .timeline-content ul { list-style: none; padding: 0; }
+  .timeline-content ul li {
+    font-size: 0.88rem; color: var(--gray-text); padding: 5px 0 5px 18px;
+    position: relative; line-height: 1.6;
+  }
+  .timeline-content ul li::before { content: '▪'; position: absolute; left: 0; color: var(--gold); }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+  .edu-card {
+    background: var(--white); border: 1px solid var(--gray-border);
+    padding: 24px; border-radius: 6px; position: relative; overflow: hidden;
+  }
+  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+  .edu-card .year { font-size: 0.78rem; color: var(--gold); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+  .edu-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .edu-card p { font-size: 0.82rem; color: var(--gray-text); }
+
+  /* AWARDS */
+  .awards-list { display: flex; flex-direction: column; gap: 1rem; }
+  .award-item {
+    display: flex; align-items: center; gap: 1.2rem;
+    background: var(--white); border: 1px solid var(--gray-border); padding: 18px 22px; border-radius: 6px;
+  }
+  .award-badge { font-size: 1.8rem; flex-shrink: 0; }
+  .award-item h4 { font-size: 0.92rem; font-weight: 700; color: var(--navy); }
+  .award-item p { font-size: 0.82rem; color: var(--gray-text); }
+
+  /* CONTACT */
+  .contact-section { background: var(--navy); }
+  .contact-section .section-title { color: var(--white); }
+  .contact-section .section-eyebrow { color: var(--gold); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .contact-text p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; }
+  .contact-icon { width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .contact-item h4 { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  .contact-item p { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: #0F1729; text-align: center; padding: 24px;
+    color: rgba(255,255,255,0.35); font-size: 0.78rem; font-family: 'Inter', sans-serif;
+    border-top: 1px solid rgba(232,160,32,0.15);
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 5%; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 6% 60px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 6%; }
+    .stats-bar { padding: 20px 6%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PHQ<span>.</span>HUY</div>
+  <div class="nav-links">
+    <a href="#about" data-ko="소개" data-en="About">소개</a>
+    <a href="#skills" data-ko="역량" data-en="Skills">역량</a>
+    <a href="#experience" data-ko="경력" data-en="Experience">경력</a>
+    <a href="#education" data-ko="학력" data-en="Education">학력</a>
+    <a href="#contact" data-ko="연락처" data-en="Contact">연락처</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="active" onclick="setLang('ko')">KO</button>
+    <button onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow" data-ko="글로벌 사업개발 전문가" data-en="Global Business Development">글로벌 사업개발 전문가</div>
+  <h1>
+    Pham Quang Huy
+    <span class="name-kr" data-ko="팜꽝후이 · 베트남 출신 · 한국 거주 9년" data-en="Vietnam · 9 Years in Korea">팜꽝후이 · 베트남 출신 · 한국 거주 9년</span>
+  </h1>
+  <p class="hero-subtitle" data-ko="한국어 TOPIK 6급 보유 베트남 인재로, 한-베 비즈니스 파트너십과 글로벌 시장 개발을 전문으로 합니다. 경영학 학사 · 한국어교육 석사." data-en="Vietnamese professional with Korean TOPIK Level 6, specializing in Korea-Vietnam business partnerships and global market development. BA in Business · MA in Korean Language Education.">한국어 TOPIK 6급 보유 베트남 인재로, 한-베 비즈니스 파트너십과 글로벌 시장 개발을 전문으로 합니다. 경영학 학사 · 한국어교육 석사.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🇰🇷 TOPIK Level 6</span>
+    <span class="hero-tag">🇻🇳 Vietnam Market Expert</span>
+    <span class="hero-tag">💼 Business Development</span>
+    <span class="hero-tag">🤝 Korea-Vietnam Bridge</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary" data-ko="연락하기" data-en="Get in Touch">연락하기</a>
+    <a href="#experience" class="btn-outline" data-ko="경력 보기" data-en="View Experience">경력 보기</a>
+  </div>
+  <div class="hero-bridge"></div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">9+</div>
+    <div class="stat-label" data-ko="한국 거주 (년)" data-en="Years in Korea">한국 거주 (년)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4</div>
+    <div class="stat-label" data-ko="자영업 운영 (년)" data-en="Years Running Business">자영업 운영 (년)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5,000<span style="font-size:1rem">만</span></div>
+    <div class="stat-label" data-ko="월 최대 매출 (원)" data-en="Peak Monthly Revenue (KRW)">월 최대 매출 (원)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4</div>
+    <div class="stat-label" data-ko="구사 가능 언어" data-en="Languages Spoken">구사 가능 언어</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-eyebrow" data-ko="ABOUT ME" data-en="ABOUT ME">ABOUT ME</div>
+    <h2 class="section-title" data-ko="두 문화를 잇는 사람" data-en="Bridging Two Cultures">두 문화를 잇는 사람</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p data-ko="2017년 한국에 온 이후, 단순한 유학생이 아닌 한국 시장에서 직접 사업을 운영하며 비즈니스 현장을 경험해왔습니다. 번개장터부터 당근마켓까지, 한국의 디지털 거래 플랫폼을 활용해 월 최대 5,000만 원의 매출을 달성했습니다." data-en="Since arriving in Korea in 2017, I have gone beyond being a student — I built and operated my own business in the Korean market, leveraging digital platforms to achieve peak monthly revenues of 50M KRW.">2017년 한국에 온 이후, 단순한 유학생이 아닌 한국 시장에서 직접 사업을 운영하며 비즈니스 현장을 경험해왔습니다. 번개장터부터 당근마켓까지, 한국의 디지털 거래 플랫폼을 활용해 월 최대 5,000만 원의 매출을 달성했습니다.</p>
+      <p data-ko="한국어교육 석사 과정을 마치며 언어와 문화에 대한 깊은 이해를 더했고, 이를 바탕으로 한-베 기업 간 파트너십 구축과 글로벌 사업개발 분야에서 독보적인 가치를 제공하고자 합니다." data-en="Completing a Master's degree in Korean Language Education deepened my understanding of language and culture. I aim to leverage this foundation to create unique value in Korea-Vietnam business partnerships and global BD roles.">한국어교육 석사 과정을 마치며 언어와 문화에 대한 깊은 이해를 더했고, 이를 바탕으로 한-베 기업 간 파트너십 구축과 글로벌 사업개발 분야에서 독보적인 가치를 제공하고자 합니다.</p>
+    </div>
+    <div class="about-highlights reveal">
+      <div class="highlight-card">
+        <h4 data-ko="🌏 한-베 문화 전문가" data-en="🌏 Korea-Vietnam Cultural Expert">🌏 한-베 문화 전문가</h4>
+        <p data-ko="양국 비즈니스 문화, 협상 스타일, 소비자 행동에 대한 깊은 이해 보유" data-en="Deep understanding of business culture, negotiation styles, and consumer behavior in both countries">양국 비즈니스 문화, 협상 스타일, 소비자 행동에 대한 깊은 이해 보유</p>
+      </div>
+      <div class="highlight-card">
+        <h4 data-ko="💡 실전 사업가 마인드셋" data-en="💡 Entrepreneurial Mindset">💡 실전 사업가 마인드셋</h4>
+        <p data-ko="학업과 병행하며 4년간 직접 사업을 운영한 실전 감각 — 이론이 아닌 현장 경험" data-en="4 years running a real business while studying — hands-on experience, not just theory">학업과 병행하며 4년간 직접 사업을 운영한 실전 감각 — 이론이 아닌 현장 경험</p>
+      </div>
+      <div class="highlight-card">
+        <h4 data-ko="🎯 베트남 시장 진입 파트너" data-en="🎯 Vietnam Market Entry Partner">🎯 베트남 시장 진입 파트너</h4>
+        <p data-ko="한국 기업의 베트남 시장 진출을 위한 현지 네트워크 및 인사이트 제공 가능" data-en="Able to provide local network and market insights for Korean companies entering Vietnam">한국 기업의 베트남 시장 진출을 위한 현지 네트워크 및 인사이트 제공 가능</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-eyebrow" data-ko="CORE SKILLS" data-en="CORE SKILLS">CORE SKILLS</div>
+    <h2 class="section-title" data-ko="핵심 역량" data-en="Core Competencies">핵심 역량</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤝</div>
+      <h3 data-ko="파트너십 구축" data-en="Partnership Building">파트너십 구축</h3>
+      <p data-ko="한국인·베트남인 파트너 및 고객과의 장기적 신뢰 관계 구축 경험. 협상, 계약 협의, 네트워킹 실무 역량." data-en="Experience building long-term trust with Korean and Vietnamese partners. Negotiation, deal structuring, and networking skills.">한국인·베트남인 파트너 및 고객과의 장기적 신뢰 관계 구축 경험. 협상, 계약 협의, 네트워킹 실무 역량.</p>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <h3 data-ko="사업 운영 & 전략" data-en="Business Operations & Strategy">사업 운영 & 전략</h3>
+      <p data-ko="재고 관리, 가격 전략, 고객 관리, 플랫폼 마케팅을 포함한 사업 운영 전반을 직접 경험." data-en="Hands-on experience in inventory management, pricing strategy, customer relations, and platform marketing.">재고 관리, 가격 전략, 고객 관리, 플랫폼 마케팅을 포함한 사업 운영 전반을 직접 경험.</p>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <h3 data-ko="문화 중재 & 통번역" data-en="Cultural Mediation & Translation">문화 중재 & 통번역</h3>
+      <p data-ko="한-베 비즈니스 커뮤니케이션에서 언어 장벽을 넘어 문화적 뉘앙스까지 전달하는 통·번역 역량." data-en="Bridging language and cultural gaps in Korea-Vietnam business communications, conveying nuance beyond mere words.">한-베 비즈니스 커뮤니케이션에서 언어 장벽을 넘어 문화적 뉘앙스까지 전달하는 통·번역 역량.</p>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📱</div>
+      <h3 data-ko="디지털 플랫폼 활용" data-en="Digital Platform Proficiency">디지털 플랫폼 활용</h3>
+      <p data-ko="당근마켓, 번개장터 등 한국 주요 플랫폼 및 SNS 마케팅, AI 도구 활용 능력." data-en="Proficient in Korean digital platforms, social media marketing, and AI productivity tools.">당근마켓, 번개장터 등 한국 주요 플랫폼 및 SNS 마케팅, AI 도구 활용 능력.</p>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">👥</div>
+      <h3 data-ko="리더십 & 팀 관리" data-en="Leadership & Team Management">리더십 & 팀 관리</h3>
+      <p data-ko="지점 매니저로서 직원 관리, 교육, 한-베 혼합 팀의 원활한 운영 경험." data-en="Branch manager experience in staff management, training, and leading mixed Korean-Vietnamese teams.">지점 매니저로서 직원 관리, 교육, 한-베 혼합 팀의 원활한 운영 경험.</p>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📚</div>
+      <h3 data-ko="언어 교육 전문성" data-en="Language Education Expertise">언어 교육 전문성</h3>
+      <p data-ko="한국어교육 석사 취득 예정. 교육 커리큘럼 설계 및 언어 습득 이론 전문 지식 보유." data-en="MSc in Korean Language Education (2026). Expertise in curriculum design and language acquisition theory.">한국어교육 석사 취득 예정. 교육 커리큘럼 설계 및 언어 습득 이론 전문 지식 보유.</p>
+    </div>
+  </div>
+
+  <!-- LANGUAGES -->
+  <div style="margin-top:3rem">
+    <h3 style="font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1.2rem" data-ko="언어 능력" data-en="Language Proficiency">언어 능력</h3>
+    <div class="lang-grid">
+      <div class="lang-item reveal">
+        <div class="flag">🇰🇷</div>
+        <h4 data-ko="한국어" data-en="Korean">한국어</h4>
+        <div class="level">TOPIK Level 6 (최고급)</div>
+        <div class="desc" data-ko="비즈니스 · 학술 · 일상 완전 구사" data-en="Business · Academic · Daily – Native level">비즈니스 · 학술 · 일상 완전 구사</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:98%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="flag">🇻🇳</div>
+        <h4 data-ko="베트남어" data-en="Vietnamese">베트남어</h4>
+        <div class="level" data-ko="모국어" data-en="Native">모국어</div>
+        <div class="desc" data-ko="완전 원어민 수준" data-en="Full native proficiency">완전 원어민 수준</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="flag">🇬🇧</div>
+        <h4 data-ko="영어" data-en="English">영어</h4>
+        <div class="level" data-ko="비즈니스 의사소통 가능" data-en="Business Communication">비즈니스 의사소통 가능</div>
+        <div class="desc" data-ko="이메일 · 회의 · 문서 작성" data-en="Email · Meetings · Documentation">이메일 · 회의 · 문서 작성</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="flag">🇨🇳</div>
+        <h4 data-ko="중국어" data-en="Chinese">중국어</h4>
+        <div class="level">HSK 3</div>
+        <div class="desc" data-ko="기초 비즈니스 의사소통" data-en="Basic business communication">기초 비즈니스 의사소통</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:40%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-eyebrow" data-ko="EXPERIENCE" data-en="EXPERIENCE">EXPERIENCE</div>
+    <h2 class="section-title" data-ko="경력사항" data-en="Work Experience">경력사항</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot">💼</div>
+      <div class="timeline-content">
+        <div class="timeline-meta">
+          <div>
+            <div class="timeline-title" data-ko="지점 매니저" data-en="Branch Manager">지점 매니저</div>
+            <div class="timeline-company" data-ko="택이네 (평택 법원점)" data-en="Taegine Restaurant – Pyeongtaek">택이네 (평택 법원점)</div>
+          </div>
+          <div class="timeline-date">2023 – Present · Pyeongtaek, Korea</div>
+        </div>
+        <ul>
+          <li data-ko="매장 운영 전반 및 직원 관리 담당 — 서비스 품질 향상 및 고객 만족도 제고" data-en="Overseeing full store operations and staff management to improve service quality and customer satisfaction">매장 운영 전반 및 직원 관리 담당 — 서비스 품질 향상 및 고객 만족도 제고</li>
+          <li data-ko="한국인 대표와 베트남인 직원 간 통·번역 및 문화 중재 역할 수행" data-en="Acting as interpreter and cultural mediator between Korean management and Vietnamese staff">한국인 대표와 베트남인 직원 간 통·번역 및 문화 중재 역할 수행</li>
+          <li data-ko="신규 고객 유치 및 단골 고객 관리를 통한 매출 안정화 기여" data-en="Contributing to revenue stabilization through new customer acquisition and retention">신규 고객 유치 및 단골 고객 관리를 통한 매출 안정화 기여</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot">🚀</div>
+      <div class="timeline-content">
+        <div class="timeline-meta">
+          <div>
+            <div class="timeline-title" data-ko="자영업 대표" data-en="Founder & Owner">자영업 대표</div>
+            <div class="timeline-company">AHQ Mobile</div>
+          </div>
+          <div class="timeline-date">2019 – 2023 · Pyeongtaek, Korea</div>
+        </div>
+        <ul>
+          <li data-ko="번개장터·당근마켓 등 C2C 플랫폼 활용 스마트폰 유통 사업 직접 운영" data-en="Founded and operated smartphone resale business leveraging Korean C2C platforms">번개장터·당근마켓 등 C2C 플랫폼 활용 스마트폰 유통 사업 직접 운영</li>
+          <li data-ko="월 평균 매출 2,000~3,000만 원, 최대 5,000만 원 달성 — 가격 전략 및 재고 관리 주도" data-en="Achieved average monthly revenue of 20–30M KRW, peaking at 50M KRW through pricing strategy and inventory management">월 평균 매출 2,000~3,000만 원, 최대 5,000만 원 달성 — 가격 전략 및 재고 관리 주도</li>
+          <li data-ko="한국인 파트너와의 협업을 통해 공급망 구축 및 비즈니스 네트워크 확장" data-en="Built supply chain and expanded business network through collaboration with Korean partners">한국인 파트너와의 협업을 통해 공급망 구축 및 비즈니스 네트워크 확장</li>
+          <li data-ko="한국인·베트남인 고객 협력업체와 소통하여 폭넓은 인적 네트워크 형성" data-en="Built extensive personal network through communication with Korean and Vietnamese clients and suppliers">한국인·베트남인 고객 협력업체와 소통하여 폭넓은 인적 네트워크 형성</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <div class="section-eyebrow" data-ko="EDUCATION" data-en="EDUCATION">EDUCATION</div>
+    <h2 class="section-title" data-ko="학력사항" data-en="Education">학력사항</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="year">2024 – 2026</div>
+      <h3 data-ko="한국어교육학과 석사" data-en="MA in Korean Language Education">한국어교육학과 석사</h3>
+      <p data-ko="온석대학원대학교" data-en="Onsuk Graduate School">온석대학원대학교</p>
+    </div>
+    <div class="edu-card reveal">
+      <div class="year">2019 – 2023</div>
+      <h3 data-ko="경영학과 학사" data-en="BA in Business Administration">경영학과 학사</h3>
+      <p data-ko="평택대학교" data-en="Pyeongtaek University">평택대학교</p>
+    </div>
+    <div class="edu-card reveal">
+      <div class="year">2015 – 2017</div>
+      <h3 data-ko="공병기계과" data-en="Engineering Technology">공병기계과</h3>
+      <p data-ko="공병기술전문학교 (베트남)" data-en="Engineering Technology School (Vietnam)">공병기술전문학교 (베트남)</p>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <div style="margin-top:3rem" class="reveal">
+    <h3 style="font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1.2rem" data-ko="수상 경력" data-en="Awards & Recognition">수상 경력</h3>
+    <div class="awards-list">
+      <div class="award-item">
+        <div class="award-badge">🥇</div>
+        <div>
+          <h4 data-ko="한국어 말하기 대회 최우수상" data-en="Korean Speech Contest – Grand Prize">한국어 말하기 대회 최우수상</h4>
+          <p data-ko="온석대학원대학교 · 2026" data-en="Onsuk Graduate School · 2026">온석대학원대학교 · 2026</p>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-badge">🏆</div>
+        <div>
+          <h4 data-ko="경진대회 우수상" data-en="Academic Competition – Excellence Award">경진대회 우수상</h4>
+          <p data-ko="평택대학교 · 2023" data-en="Pyeongtaek University · 2023">평택대학교 · 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="reveal">
+    <div class="section-eyebrow">CONTACT</div>
+    <h2 class="section-title" data-ko="함께 일해요" data-en="Let's Work Together">함께 일해요</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-text reveal">
+      <p data-ko="한-베 비즈니스 파트너십, 베트남 시장 진출, 글로벌 사업개발 등 협업 기회가 있으시다면 언제든지 연락 주세요. 빠르게 회신드리겠습니다." data-en="If you have opportunities in Korea-Vietnam business partnerships, Vietnam market entry, or global business development, I'd love to connect. I respond quickly.">한-베 비즈니스 파트너십, 베트남 시장 진출, 글로벌 사업개발 등 협업 기회가 있으시다면 언제든지 연락 주세요. 빠르게 회신드리겠습니다.</p>
+    </div>
+    <div class="contact-items reveal">
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h4>EMAIL</h4>
+          <p>huyndx9@gmail.com</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>PHONE</h4>
+          <p>+82-10-3644-8698</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>LOCATION</h4>
+          <p data-ko="경기도 평택 · 대한민국" data-en="Pyeongtaek, Gyeonggi · South Korea">경기도 평택 · 대한민국</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Pham Quang Huy · <span data-ko="글로벌 사업개발 전문가" data-en="Global Business Development Professional">글로벌 사업개발 전문가</span></p>
+</footer>
+
+<script>
+  // Language toggle
+  let currentLang = 'ko';
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-toggle button').forEach((btn, i) => {
+      btn.classList.toggle('active', (i === 0 && lang === 'ko') || (i === 1 && lang === 'en'));
+    });
+    document.querySelectorAll('[data-ko]').forEach(el => {
+      el.textContent = lang === 'ko' ? el.dataset.ko : el.dataset.en;
+    });
+    document.documentElement.lang = lang;
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
